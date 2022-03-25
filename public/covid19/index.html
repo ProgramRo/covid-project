@@ -51,11 +51,12 @@
     </div>
 </div>
     <br>
+    <!--Formulario-->
     <section>
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <div class="col-md-6 text-center" style="display: block" id="form-ocultar">
+                <div class="col-md-12">
+                    <div class="text-center px-5 mx-5" style="display: block" id="form-ocultar">
                         <form id="formulario">
                             <div class="form-group">
                                 <label>Email</label>
@@ -73,21 +74,32 @@
             </div>
         </div>
     </section>
-    <div class="container" id="grafico">
+    <!--Gráfico-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <canvas id="grafico"></canvas>
+            </div>
+        </div>
+    </div>
+    <!--Tabla-->
+    <div class="container" id="tabla">
         <div class="row">
             <div class="col"></div>
         </div>
     </div>
+    <!--Gráfico Modal-->
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-        crossorigin="anonymous"></script>
+    <!--CDN Bundle Boostrap 5-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+    <!--CDN Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <script src="assets/scripts.js"></script>
 </body>
 
 </html>
