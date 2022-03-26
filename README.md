@@ -13,4 +13,4 @@
   - Iteración de objetos.
   - Utilización de framework Chart.js
   - Creación y utilización de modales mediante Bootstrap 5.
-  - Utilización de funcionalidades como: createElement y appendChild.
+  - Utilización de funcionalidades como: `createElement` y `appendChild`.
