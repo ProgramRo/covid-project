@@ -4,7 +4,12 @@ const formularioSelector = document.querySelector('#formulario')
 const correoSelector = document.querySelector('#correo')
 const passwordSelector = document.querySelector('#password')
 const tablaSelector = document.querySelector('#tabla')
-const grafico1Selector = document.querySelector('#grafico')
+const grafico1Selector = document.querySelector('#grafico-total')
+const tituloModalSelector = document.querySelector('#titulo-modal')
+const cuerpoModalSelector = document.querySelector('#cuerpo-modal')
+const cerrarModalSelector = document.querySelectorAll('.cerrar-modal')
+const myModal = new bootstrap.Modal(document.querySelector('#exampleModal'), {})
+
 
 let datosTomados = []
 
@@ -20,6 +25,59 @@ const crearTr = () => {
   return document.createElement("tr")
 }
 
+const mostrarGraficoModal = (datos) => {
+  // debugger
+  const data = {
+    labels: datos.map(p => p.location),
+    datasets: [
+      {
+        label: 'Casos Activos',
+        data: datos.map(p => p.active),
+        borderColor: 'red',
+        backgroundColor: 'red',
+      },
+      {
+        label: 'Casos Confirmados',
+        data: datos.map(p => p.confirmed),
+        borderColor: 'yellow',
+        backgroundColor: 'yellow',
+      },
+      {
+        label: 'Casos Muertos',
+        data: datos.map(p => p.deaths),
+        borderColor: 'grey',
+        backgroundColor: 'grey',
+      },
+      {
+        label: 'Casos Recuperados',
+        data: datos.map(p => p.recovered),
+        borderColor: 'skyblue',
+        backgroundColor: 'skyblue',
+      }
+    ]
+  };
+  // debugger
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Bar Chart'
+        }
+      }
+    },
+  };
+  const grafico2Selector = document.querySelector('#grafico-modal')
+  const ctx = grafico2Selector.getContext('2d');
+  new Chart(ctx, config)
+}
+
 const manejadorDeClick = async (e) => {
   const location = e.target.dataset.location
   try {
@@ -32,15 +90,19 @@ const manejadorDeClick = async (e) => {
           })
       const { data } = await response.json()
       console.log(data)
+      // debugger
+      tituloModalSelector.innerHTML = data.location
+      const listaDePaises = []
+      listaDePaises.push(data)
+      // debugger
+      cuerpoModalSelector.innerHTML = ""
+      cuerpoModalSelector.innerHTML = '<canvas id="grafico-modal"></canvas>'
+      mostrarGraficoModal(listaDePaises)
+      myModal.show()
   } catch (err) {
       console.error(`Error: ${err}`)
   }
 }
-
-const mostrarModal = () => {
-  
-}
-
 
 const mostrarTabla = () => {
     //console.log(datosTomados)
@@ -69,6 +131,7 @@ const mostrarTabla = () => {
 }
 
 const mostrarGraficoCasos = (paisesCasosActivos) => {
+  // debugger
     const data = {
       labels: paisesCasosActivos.map(p => p.location),
       datasets: [
@@ -98,6 +161,7 @@ const mostrarGraficoCasos = (paisesCasosActivos) => {
         }
       ]
     };
+    // debugger
     const config = {
       type: 'bar',
       data: data,
@@ -109,7 +173,7 @@ const mostrarGraficoCasos = (paisesCasosActivos) => {
           },
           title: {
             display: true,
-            text: 'Chart.js Bar Chart'
+            text: 'Casos de Covid-19 a Nivel Mundial'
           }
         }
       },
