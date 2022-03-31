@@ -8,11 +8,36 @@ const grafico1Selector = document.querySelector('#grafico-total')
 const tituloModalSelector = document.querySelector('#titulo-modal')
 const cuerpoModalSelector = document.querySelector('#cuerpo-modal')
 const cerrarModalSelector = document.querySelectorAll('.cerrar-modal')
-const myModal = new bootstrap.Modal(document.querySelector('#exampleModal'), {})
+const iniciarSesionSelector = document.querySelector('#iniciar-sesion')
+const cerrarSesionSelector = document.querySelector('#cerrar-sesion')
+const situacionChileSelector = document.querySelector('#situacion-chile')
+const tablaCasosSelector = document.querySelector('#tabla-casos')
+const graficoCasosSelector = document.querySelector('#grafico-casos')
+const modalSelector = document.querySelector('#exampleModal')
+
+const myModal = modalSelector && new bootstrap.Modal(modalSelector, {})
 
 
 let datosTomados = []
 
+const ocultarObjeto = (objeto) => {
+  if (objeto.style.display === "none") {
+      objeto.style.display = "block";
+  } else {
+      objeto.style.display = "none";
+  }
+}
+const mostrarObjeto = (objeto) => {
+  if (objeto.style.display === "block") {
+      objeto.style.display = "none";
+  } else {
+      objeto.style.display = "block";
+  }
+}
+
+cerrarSesionSelector.addEventListener('click', () => {
+  localStorage.removeItem('jwt-token')
+})
 
 const crearTd = (texto) => {
   const text = document.createTextNode(texto)
@@ -213,7 +238,7 @@ const postData = async (email, password) => {
   }
 }
 
-formularioSelector.addEventListener("submit", async (event) => {
+formularioSelector && formularioSelector.addEventListener("submit", async (event) => {
     event.preventDefault()
     const dataUser = await postData(correoSelector.value, passwordSelector.value)
     console.log(dataUser)
@@ -224,6 +249,12 @@ formularioSelector.addEventListener("submit", async (event) => {
     const paisesCasosActivos = datosTomados.filter((datosTomados) => {
         return datosTomados.confirmed >= 10000
     })
+    // Función que oculta y muestra elementos
+    ocultarObjeto(iniciarSesionSelector)
+    mostrarObjeto(cerrarSesionSelector)
+    mostrarObjeto(situacionChileSelector)
+    mostrarObjeto(tablaCasosSelector)
+    mostrarObjeto(graficoCasosSelector)
 
     mostrarGraficoCasos(paisesCasosActivos)
 

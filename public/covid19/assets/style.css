@@ -4,3 +4,21 @@ body{
 #titulo{
     font-weight: 500;
 }
+#iniciar-sesion {
+    display: block;
+}
+#situacion-chile {
+    display: none;
+}
+#cerrar-sesion {
+    display: none;
+}
+#form-section {
+    display: block;
+}
+#tabla-casos{
+    display: none;
+}
+#grafico-casos{
+    display: none;
+}

@@ -15,37 +15,28 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Covid19</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#formulario">Iniciar sesión</a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="navbar-brand nav-link" href="../covid19/index.html">COVID19</a>
+                <form class="d-flex">
+                    <button type="button" class="btn"><a class="nav-link" href="../covid19/index.html">Home</a></button>
+                    <button type="button" class="btn" id="iniciar-sesion" data-bs-toggle="modal" data-bs-target="#form-session"><a class="nav-link" href="#">Iniciar sesión</a></button>
+                    <button type="button" class="btn" id="situacion-chile"><a class="nav-link" href="../covid19/index-chile.html">Situación Chile</a></button>
+                    <button type="button" class="btn" id="cerrar-sesion"><a class="nav-link" href="../covid19/index.html">Cerrar sesión</a></button>
+                </form>
             </div>
         </nav>
     </header>
-    <br>
+    
+    <!--
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-center" id="titulo">Paises con Covid19</h1>
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center" id="titulo">Países con COVID19</h1>
+            </div>
         </div>
     </div>
-</div>
     <br>
-    <!--Formulario-->
     <section>
         <div class="container">
             <div class="row">
@@ -71,8 +62,9 @@
             </div>
         </div>
     </section>
+    -->
     <!--Gráfico-->
-    <div class="container">
+    <div class="container" id="grafico-casos">
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -84,7 +76,7 @@
         </div>
     </div>
     <!--Tabla-->
-    <div class="container mt-4">
+    <div class="container mt-4" id="tabla-casos">
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -105,8 +97,52 @@
             </div>
         </div>
     </div>
+
+    <!--Modal Form-->
+    <div class="modal fade" id="form-session" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Países con COVID19</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="text-center" id="titulo">Países con COVID19</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div>
+                                <div id="form-ocultar">
+                                    <form id="formulario" class="card">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input id="correo" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su correo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Contraseña</label>
+                                                <input id="password" type="password" class="form-control" placeholder="Ingrese su contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-dark w-100 btn-lg">Entrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Gráfico Modal-->
-    <!-- Modal -->
     <div
         class="modal fade"
         id="exampleModal"
