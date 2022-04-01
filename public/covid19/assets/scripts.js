@@ -241,7 +241,8 @@ const postData = async (email, password) => {
 // Escuchador del evento submit en el formulario
 formularioSelector && formularioSelector.addEventListener("submit", async (event) => {
     event.preventDefault()
-    const dataUser = await postData(correoSelector.value, passwordSelector.value)
+
+    postData(correoSelector.value, passwordSelector.value)
 
     datosTomados = await getData()
 
@@ -249,6 +250,7 @@ formularioSelector && formularioSelector.addEventListener("submit", async (event
     const paisesCasosActivos = datosTomados.filter((datosTomados) => {
         return datosTomados.confirmed >= 10000
     })
+
     // Función que oculta y muestra elementos
     ocultarObjeto(iniciarSesionSelector)
     mostrarObjeto(cerrarSesionSelector)
