@@ -1,8 +1,8 @@
-// selectores
+// Selectores
 const contenedorGraficoSelector = document.querySelector("#contenedor-grafico");
 const graficoChileSelector = document.querySelector('#grafico-chile')
 
-// mis funciones
+// Función que pide los datos a la API
 const getDatos = async (endpoint) => {
   try {
     const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
@@ -12,15 +12,14 @@ const getDatos = async (endpoint) => {
       },
     });
     const { data } = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     console.error(`Error: ${err}`);
   }
 }
 
+// Función que crea el gráfico
 const crearGrafico = (confirmed, deaths, recovered) => {
-  // debugger
     const data = {
       labels: confirmed.map(p => p.date),
       datasets: [
@@ -44,7 +43,6 @@ const crearGrafico = (confirmed, deaths, recovered) => {
         }
       ]
     };
-    // debugger
     const config = {
       type: 'line',
       data: data,
@@ -64,18 +62,12 @@ const crearGrafico = (confirmed, deaths, recovered) => {
     const ctx = graficoChileSelector.getContext('2d');
     new Chart(ctx, config)
 }
-/*
-function crearGrafico(data) {
-  // agregar logica para pintar 
-  new Chart(contenedorGraficoSelector, {})
-}
-*/
 
-// mi programa
+// IIFE asíncrona que muestra el gráfico con la información 
 (async () => {
-  const confirmedData = await getDatos("confirmed");
-  const deathsData = await getDatos("deaths");
-  const recoveredData = await getDatos("recovered");
+  const confirmedData = await getDatos("confirmed")
+  const deathsData = await getDatos("deaths")
+  const recoveredData = await getDatos("recovered")
   
   crearGrafico(confirmedData, deathsData, recoveredData)
 })();

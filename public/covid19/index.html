@@ -17,52 +17,17 @@
     <header>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand nav-link" href="../covid19/index.html">COVID19</a>
+                <a class="navbar-brand nav-link" href="http://localhost:3000/covid19/">COVID19</a>
                 <form class="d-flex">
-                    <button type="button" class="btn"><a class="nav-link" href="../covid19/index.html">Home</a></button>
+                    <button type="button" class="btn"><a class="nav-link" href="http://localhost:3000/covid19/">Home</a></button>
                     <button type="button" class="btn" id="iniciar-sesion" data-bs-toggle="modal" data-bs-target="#form-session"><a class="nav-link" href="#">Iniciar sesión</a></button>
                     <button type="button" class="btn" id="situacion-chile"><a class="nav-link" href="../covid19/index-chile.html">Situación Chile</a></button>
-                    <button type="button" class="btn" id="cerrar-sesion"><a class="nav-link" href="../covid19/index.html">Cerrar sesión</a></button>
+                    <button type="button" class="btn" id="cerrar-sesion"><a class="nav-link" href="http://localhost:3000/covid19/">Cerrar sesión</a></button>
                 </form>
             </div>
         </nav>
     </header>
-    
-    <!--
-<div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center" id="titulo">Países con COVID19</h1>
-            </div>
-        </div>
-    </div>
-    <br>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <div id="form-ocultar">
-                        <form id="formulario" class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input id="correo" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese su correo">
-                                </div>
-                                <div class="form-group">
-                                    <label>Contraseña</label>
-                                    <input id="password" type="password" class="form-control" placeholder="Ingrese su contraseña">
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-dark w-100 btn-lg">Entrar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
+
     <!--Gráfico-->
     <div class="container" id="grafico-casos">
         <div class="row">
@@ -103,7 +68,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Países con COVID19</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Formulario de inicio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -130,7 +95,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-dark w-100 btn-lg">Entrar</button>
+                                            <button type="submit" class="btn btn-dark w-100 btn-lg" data-bs-dismiss="modal">Entrar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -143,14 +108,7 @@
     </div>
 
     <!--Gráfico Modal-->
-    <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-        >
+    <div class="modal fade" id="modal-contenedor-grafico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -176,7 +134,7 @@
         crossorigin="anonymous"></script>
     <!--CDN Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-
+    <!--Own JS File-->
     <script src="assets/scripts.js"></script>
 </body>
 

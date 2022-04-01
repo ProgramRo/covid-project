@@ -1,5 +1,4 @@
-// const { header } = require("express/lib/request")
-
+// Selectores de elementos a trabajar
 const formularioSelector = document.querySelector('#formulario')
 const correoSelector = document.querySelector('#correo')
 const passwordSelector = document.querySelector('#password')
@@ -13,13 +12,14 @@ const cerrarSesionSelector = document.querySelector('#cerrar-sesion')
 const situacionChileSelector = document.querySelector('#situacion-chile')
 const tablaCasosSelector = document.querySelector('#tabla-casos')
 const graficoCasosSelector = document.querySelector('#grafico-casos')
-const modalSelector = document.querySelector('#exampleModal')
+const modalSelector = document.querySelector('#modal-contenedor-grafico')
 
 const myModal = modalSelector && new bootstrap.Modal(modalSelector, {})
 
-
+// Única variable global a utilizar
 let datosTomados = []
 
+// Funciones para ocultar y mostrar elementos
 const ocultarObjeto = (objeto) => {
   if (objeto.style.display === "none") {
       objeto.style.display = "block";
@@ -35,10 +35,12 @@ const mostrarObjeto = (objeto) => {
   }
 }
 
+// Evento para cerrar sesión y eliminar token
 cerrarSesionSelector.addEventListener('click', () => {
   localStorage.removeItem('jwt-token')
 })
 
+// Función que crea datos en una tabla
 const crearTd = (texto) => {
   const text = document.createTextNode(texto)
   const td = document.createElement("td")
@@ -46,12 +48,13 @@ const crearTd = (texto) => {
   return td
 }
 
+// Función que crea filas en una tabla
 const crearTr = () => {
   return document.createElement("tr")
 }
 
+// Función que muestra el gráfico del modal
 const mostrarGraficoModal = (datos) => {
-  // debugger
   const data = {
     labels: datos.map(p => p.location),
     datasets: [
@@ -81,7 +84,6 @@ const mostrarGraficoModal = (datos) => {
       }
     ]
   };
-  // debugger
   const config = {
     type: 'bar',
     data: data,
@@ -103,6 +105,7 @@ const mostrarGraficoModal = (datos) => {
   new Chart(ctx, config)
 }
 
+// Función que solicita la información y crea el gráfico en el modal
 const manejadorDeClick = async (e) => {
   const location = e.target.dataset.location
   try {
@@ -114,12 +117,9 @@ const manejadorDeClick = async (e) => {
               },
           })
       const { data } = await response.json()
-      console.log(data)
-      // debugger
       tituloModalSelector.innerHTML = data.location
       const listaDePaises = []
       listaDePaises.push(data)
-      // debugger
       cuerpoModalSelector.innerHTML = ""
       cuerpoModalSelector.innerHTML = '<canvas id="grafico-modal"></canvas>'
       mostrarGraficoModal(listaDePaises)
@@ -129,8 +129,8 @@ const manejadorDeClick = async (e) => {
   }
 }
 
+// Función que crea los elementos de la tabla a mostrar
 const mostrarTabla = () => {
-    //console.log(datosTomados)
     for (let i = 0; i < datosTomados.length; i++) {
         const tr = crearTr()
         tr.appendChild(crearTd(datosTomados[i].location))
@@ -142,7 +142,6 @@ const mostrarTabla = () => {
         const tdButton = crearTd("")
         const button = document.createElement("button")
         button.dataset.location = datosTomados[i].location
-        // button.dataset.indice = i
         button.addEventListener("click", manejadorDeClick)
 
         button.classList.add("btn", "btn-link")
@@ -155,8 +154,8 @@ const mostrarTabla = () => {
     }
 }
 
+// Función que crea el gráfico con los casos totales activos
 const mostrarGraficoCasos = (paisesCasosActivos) => {
-  // debugger
     const data = {
       labels: paisesCasosActivos.map(p => p.location),
       datasets: [
@@ -186,7 +185,6 @@ const mostrarGraficoCasos = (paisesCasosActivos) => {
         }
       ]
     };
-    // debugger
     const config = {
       type: 'bar',
       data: data,
@@ -207,6 +205,7 @@ const mostrarGraficoCasos = (paisesCasosActivos) => {
     new Chart(ctx, config)
 }
 
+// Función que obtiene la información de la API
 const getData = async () => {
   try {
       const response = await fetch("http://localhost:3000/api/total",
@@ -223,6 +222,7 @@ const getData = async () => {
   }
 }
 
+// Función que crea el token con la información del usuario
 const postData = async (email, password) => {
   try {
       const response = await fetch("http://localhost:3000/api/login", // Consulta para crear token
@@ -238,14 +238,14 @@ const postData = async (email, password) => {
   }
 }
 
+// Escuchador del evento submit en el formulario
 formularioSelector && formularioSelector.addEventListener("submit", async (event) => {
     event.preventDefault()
     const dataUser = await postData(correoSelector.value, passwordSelector.value)
-    console.log(dataUser)
 
     datosTomados = await getData()
 
-    // Se filtran los datos para obtener los mayores confirmados (10000)
+    // Se filtran los datos para obtener los mayores confirmados (>= 10000)
     const paisesCasosActivos = datosTomados.filter((datosTomados) => {
         return datosTomados.confirmed >= 10000
     })
@@ -258,7 +258,5 @@ formularioSelector && formularioSelector.addEventListener("submit", async (event
 
     mostrarGraficoCasos(paisesCasosActivos)
 
-    mostrarTabla() // Cuando se llame a la función, ponerle los argumentos si es que hay parámetros
-
-    // mostrarModal(datosTomados)
+    mostrarTabla()
 })
